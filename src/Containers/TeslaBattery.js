@@ -2,12 +2,13 @@ import React from 'react';
 import './TeslaBattery.css';
 import TeslaNotice from '../Components/TeslaNotice/TeslaNotice';
 import TeslaCar from '../Components/TeslaCar/TeslaCar';
+import TeslaStats from '../Components/TeslaStats/TeslaStats';
 
 class TeslaBattery extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            carstarts: [],
+            carstats: [],
             config: {
                 speed: 55,
                 temperature: 28,
@@ -17,11 +18,12 @@ class TeslaBattery extends React.Component {
         }
     }
     render() {
-        const { config } = this.state;
+        const { config, carstats } = this.state;
         return (
             <form className="tesla-battery">
                 <h1>Range Per Charge</h1>
                 <TeslaCar wheelsize={config.wheels} />
+                <TeslaStats carstats={carstats} />
                 <TeslaNotice />
             </form>
         );
