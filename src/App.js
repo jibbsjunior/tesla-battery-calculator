@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Components/Header/Header';
+import TeslaBattery from './Containers/TeslaBattery';
 
 // const App = () => {
 //     return (
@@ -15,6 +16,7 @@ class App extends Component {
         return (
             <div className="App"> 
                 <Header />
+                <TeslaBattery />
             </div>
         )
     }
