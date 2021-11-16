@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'react';
 import './TeslaWheels.css';
+
+
 const LabelLists = (props) => {
   const value = props.wheels.value;
   const changeHandler = props.wheels.handleChangeWheels;
   const sizes = [19, 21];
   const LabelItems = sizes.map(size => (
-    <label key={size} className={`tesla-wheels__item tesla-wheels__item--${size} ${value === size ? 'tesla-wheels__item--active' : '` }`}>
+    <label key={size} className={`tesla-wheels__item tesla-wheels__item--${size} ${value === size ? 'tesla-wheels__item--active' : ''}`}>
       <input
         type="radio"
         name="wheelsize"
@@ -14,7 +16,7 @@ const LabelLists = (props) => {
         checked={value === size} 
         onChange={() => {changeHandler(size)}} />
       <p>
-        {size}"
+        {size}
       </p>
     </label> 
     )
@@ -33,8 +35,10 @@ const TeslaWheels = (props) => (
     </div>
   </div>
 );
+
 TeslaWheels.propTypes = {
   value: PropTypes.number,
   handleChangeWheels: PropTypes.func
 }
+
 export default TeslaWheels;

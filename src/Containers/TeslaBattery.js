@@ -6,6 +6,7 @@ import TeslaStats from '../Components/TeslaStats/TeslaStats';
 import TeslaCounter from '../Components/TeslaCounter/TeslaCounter';
 import { getModelData } from '../Services/BatteryService';
 import TeslaClimate from "../Components/TeslaClimate/TeslaClimate";
+import TeslaWheels from "../Components/TeslaWheels/TeslaWheels";
 
 class TeslaBattery extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class TeslaBattery extends React.Component {
     this.decrement = this.decrement.bind(this);
     this.updateCounterState = this.updateCounterState.bind(this);
     this.handleChangeClimate = this.handleChangeClimate.bind(this);
+    this.handleChangeWheels = this.handleChangeWheels.bind(this);
     
     this.state = {
       carstats: [],
@@ -54,6 +56,12 @@ statsUpdate() {
 handleChangeClimate() {
   const config = {...this.state.config};
   config['climate'] = !this.state.config.climate;
+  this.setState({ config });
+}
+
+handleChangeWheels(size) {
+  const config = {...this.state.config};
+  config['wheels'] = size;
   this.setState({ config });
 }
   
@@ -133,6 +141,10 @@ updateCounterState(title, newValue) {
                 limit={this.state.config.temperature > 10}
                 handleChangeClimate={this.handleChangeClimate}
             /> 
+            <TeslaWheels
+            value={this.state.config.wheels}
+            handleChangeWheels={this.handleChangeWheels}
+            />
           </div>
         </div>
         <TeslaNotice />
