@@ -3,23 +3,32 @@ import './App.css';
 import Header from './Components/Header/Header';
 import TeslaBattery from './Containers/TeslaBattery';
 
-// const App = () => {
-//     return (
-//         <div cla>
-//             <h1>Tesla Battery Range Calculator</h1>
-//         </div>
-//     )
-// }
+const counterDefaultVal = {
+  speed: {
+    title: "Speed",
+    unit: "mph",
+    step: 5,
+    min: 45,
+    max: 70
+  },
+  temperature: {
+    title: "Outside Temperature",
+    unit: "°",
+    step: 10,
+    min: -10,
+    max: 40
+  }
+};
 
 class App extends Component {
-    render() {
-        return (
-            <div className="App"> 
-                <Header />
-                <TeslaBattery />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <TeslaBattery counterDefaultVal={counterDefaultVal}/>
+      </div>
+    );
+  }
 }
 
-export default App
+export default App;
