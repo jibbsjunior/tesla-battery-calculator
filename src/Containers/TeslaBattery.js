@@ -3,6 +3,7 @@ import './TeslaBattery.css';
 import TeslaNotice from '../Components/TeslaNotice/TeslaNotice';
 import TeslaCar from '../Components/TeslaCar/TeslaCar';
 import TeslaStats from '../Components/TeslaStats/TeslaStats';
+import { getModelData } from '../Services/BatteryService';
 
 class TeslaBattery extends React.Component {
     constructor(props){
@@ -17,6 +18,33 @@ class TeslaBattery extends React.Component {
             }
         }
     }
+
+    calculateStats = (models, value) => {
+    const dataModels = getModelData();
+    return models.map(model => {
+        // ES6 Object destructuring Syntax,
+        // takes out required values and create references to them
+        const { speed, temperature, climate, wheels } = value;
+        const miles = dataModels[model][wheels][climate ? 'on' : 'off'].speed[speed][temperature];
+        return {
+        model,
+        miles
+        };
+    });
+    }
+    
+    statsUpdate() {
+    const carModels = ['60', '60D', '75', '75D', '90D', 'P100D'];
+    // Fetch model info from BatteryService and calculate then update state
+    this.setState({
+        carstats: this.calculateStats(carModels, this.state.config)
+    })  
+    }
+
+    componentDidMount() {
+    this.statsUpdate(); 
+    }
+
     render() {
         const { config, carstats } = this.state;
         return (
